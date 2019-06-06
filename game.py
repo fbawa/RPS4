@@ -2,51 +2,67 @@
 
 import random
 
-print("Rock, Paper, Scissors, Shoot!")
+print("Rock, Paper, Scissors, Shoot!") # this is also a comment
 
-# Capture inputs
+# CAPTURE INPUTS
 
-user_choice = input("Please choose one of the following options: 'rock, 'paper', or 'scissors':")
+user_choice = input("Please choose one of the following options: 'rock', 'paper', or 'scissors' (without the quotes):")
 
-print("-----------")
-print("Selected:", user_choice)
+print("--------------")
+print("USER CHOICE:", user_choice)
 
-# Validate INPUTS
+# VALIDATE INPUTS
 
 options = ["rock", "paper", "scissors"]
 
-if user_choice in (options)                            :
-    pass
-else:
-    print("Invalid selection, please try again")
+if user_choice not in options:
+    print("INVALID SELECTION, PLEASE TRY AGAIN...")
     exit()
 
-# Generate computer selection
-
+# GENERATE COMPUTER SELECTION
 
 computer_choice = random.choice(options)
 
-print("-------------")
-print("Generating...")
-print("Computer Choice:", computer_choice)
+print("--------------")
+print("GENERATING...")
+print("COMPUTER CHOICE:", computer_choice)
 
-# Determine the winner
+# DETERMINE THE WINNER
+#
+# rock beats scissors
+# paper beats rock
+# scissors beats paper
+# same selections is a tie
+#
+# first attribute represents the user, second represents the computer
+winners = {
+    "rock":{
+        "rock": None,
+        "paper": "paper",
+        "scissors": "rock",
+    },
+    "paper":{
+        "rock": "paper",
+        "paper": None,
+        "scissors": "scissors",
+    },
+    "scissors":{
+        "rock": "rock",
+        "paper": "scissors",
+        "scissors": None,
+    },
+}
 
-if user_choice == computer_choice:
-    print("tie")
+winning_choice = winners[user_choice][computer_choice]
 
-elif user_choice == "rock" and computer_choice == "paper":
-    print("paper")
-elif user_choice == "rock" and computer_choice == "scissors":
-    print ("rock")
-elif user_choice == "paper" and computer_choice == "scissors":
-    print ("scissors")
+# DISPLAY FINAL OUTPUTS / OUTCOMES
 
+if winning_choice:
+    if winning_choice == user_choice:
+        print("YOU WON")
+    elif winning_choice == computer_choice:
+        print("YOU LOST")
+else:
+    print("TIE")
 
-#rock beats scissors
-#paper beats rock
-#scissors beats paper
-#same selection is a tie
-
-
-# Display final outputs / outcome
+print("Thanks for playing. Please play again!")
